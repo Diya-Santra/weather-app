@@ -1,98 +1,324 @@
 * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
+
 body {
-  background-color: rgb(2, 2, 54) !important;
-  color: white !important;
+    background-color: rgb(2, 2, 54) !important;
+    color: white !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align to the top, not center vertically for better flow */
+    min-height: 100vh; /* Ensure body takes full viewport height */
+    padding: 20px; /* Add some padding around the content */
 }
-.navbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  border-radius: 10px;
-}
-.input-group {
-  flex: 1 1 auto;
-  max-width: 300px;
-}
-#humidity,
-#wind,
-#pressure,
-#searchHum,
-#searchWind,
-#searchPress {
-  height: 200px;
-  width: 200px;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: large;
-}
-.hwp {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-top: 1rem;
-  text-align: center;
-}
-.hwp div{
-  flex: 1 1 100px; 
-  max-width: 200px;
-}
-.hwp img {
-  width: 100%;
-  max-width: 200px;
-  height: auto;
-}
-#homeIcon,#searchIcon{
-  width: 300px;
-}
-.temp{
-  font-size: large;
-}
-.back-arrow {
-  font-size: 24px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin-right: 10px;
-  color: white;
-}
-@media (max-width: 576px) {
-  .input-group {
-    width: 100%;
-  }
-  .btn-close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-  }
-}
-.icon {
-  margin-top: 100px;
-  height: 150px;
-  width: 150px;
-  border: solid black;
-}
-.place {
-  border: solid black;
-  height: 80px;
-  width: 250px;
-  margin-top: 30px;
-}
+
 .container {
-  padding: 1rem;
-  max-width: 100%;
+    padding: 1.5rem; /* Increased padding for more breathing room */
+    max-width: 900px; /* Set a max-width for better control on larger screens */
+    width: 100%; /* Ensure it takes full width up to max-width */
+    background-color: rgba(255, 255, 255, 0.05); /* Slightly transparent background */
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* Enhanced shadow for depth */
 }
+
 .navbar {
-  flex-wrap: wrap;
-  padding: 1rem;
-  justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    padding: 1rem 1.5rem; /* Consistent padding */
+    background-color: rgba(255, 255, 255, 0.1); /* Slightly lighter background for navbar */
+    margin-bottom: 2rem; /* Space below navbar */
 }
-.search-button {
-  margin-top: 0.5rem;
+
+.navbar-brand {
+    color: white !important;
+    font-size: 1.8rem; /* Larger brand text */
+    font-weight: 600;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
+
+.form-control {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.form-control:focus {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: #007bff; /* Bootstrap primary blue */
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+    color: white;
+}
+
+.btn-outline-success {
+    background-color: #28a745; /* Green button */
+    border-color: #28a745;
+    color: white;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+    color: white;
+}
+
+.weather-card {
+    background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    margin-top: 1.5rem; /* Space from navbar */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.5s ease-in-out; /* Smooth transition for display changes */
+    position: relative; /* For absolute positioning of back button */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px; /* Ensure a minimum height for consistent layout */
+}
+
+.weather-icon { /* Renamed from #homeIcon, #searchIcon for reusability */
+    width: 150px;
+    height: auto;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3)); /* Shadow for the icon */
+}
+
+.city-name { /* Renamed from #cityName, #searchCity */
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+.temperature { /* Renamed from .temp, #temperature, #searchTemp */
+    font-size: 4rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #87CEEB; /* Sky blue color for temperature */
+}
+
+.weather-description { /* Renamed from #description, #searchDesc */
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.weather-data-grid { /* Renamed from .hwp */
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    justify-content: center; /* Center items in the grid */
+    gap: 1.5rem; /* Increased gap */
+    width: 100%;
+    margin-top: 1.5rem;
+}
+
+.weather-info-box { /* Renamed from .hwp div, #humidity, #wind, #pressure, etc. */
+    background-color: rgba(255, 255, 255, 0.15); /* Slightly darker background for info boxes */
+    border-radius: 10px;
+    padding: 1rem;
+    flex: 1 1 180px; /* Allow boxes to grow/shrink, with a base of 180px */
+    max-width: 200px; /* Max width for consistency */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: 500;
+    min-height: 120px; /* Minimum height for better visual balance */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+}
+
+.weather-info-box:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+}
+
+.info-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.5rem;
+}
+
+.info-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+}
+
+
+/* Specific styling for info box icons (humidity, wind, pressure) */
+/* This will now be the base size for ALL info icons, including pressure */
+.weather-info-box img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 0.5rem;
+}
+
+/* Make Humidity and Wind icons bigger than Pressure */
+#homeHumidityIcon,
+#searchHumidityIcon,
+#homeWindIcon,
+#searchWindIcon {
+    width: 70px; /* These will be larger than the 60px base */
+    height: 70px;
+}
+
+
+.back-arrow {
+    font-size: 2.5rem; /* Larger arrow */
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    position: absolute; /* Position relative to .weather-card */
+    top: 1.5rem;
+    left: 1.5rem;
+    transition: transform 0.2s ease-in-out;
+}
+
+.back-arrow:hover {
+    transform: translateX(-5px);
+}
+
+/* --- Media Queries --- */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.5rem;
+    }
+
+    .form-control, .btn-outline-success {
+        padding: 0.6rem 1rem;
+    }
+
+    .city-name {
+        font-size: 2.5rem;
+    }
+
+    .temperature {
+        font-size: 3.5rem;
+    }
+
+    .weather-description {
+        font-size: 1.3rem;
+    }
+
+    .weather-data-grid {
+        gap: 1rem;
+    }
+
+    .weather-info-box {
+        flex: 1 1 150px;
+        max-width: 180px;
+        padding: 0.8rem;
+        min-height: 100px;
+        font-size: 1rem;
+    }
+
+    .info-value {
+        font-size: 1.3rem;
+    }
+
+    /* Adjust icon sizes for smaller screens */
+    .weather-info-box img { /* Base size for pressure on this breakpoint */
+        width: 50px;
+        height: 50px;
+    }
+
+    #homeHumidityIcon,
+    #searchHumidityIcon,
+    #homeWindIcon,
+    #searchWindIcon {
+        width: 100px; /* Humidity/Wind larger for this breakpoint */
+        height: 60px;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .d-flex {
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    .form-control {
+        flex-grow: 1; /* Allow input to fill available space */
+    }
+
+    .btn-outline-success {
+        flex-shrink: 0; /* Prevent button from shrinking */
+    }
+
+    .weather-icon {
+        width: 120px;
+    }
+
+    .city-name {
+        font-size: 2rem;
+    }
+
+    .temperature {
+        font-size: 3rem;
+    }
+
+    .weather-description {
+        font-size: 1.1rem;
+    }
+
+    .weather-data-grid {
+        flex-direction: column; /* Stack info boxes vertically */
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .weather-info-box {
+        width: 80%; /* Take up more width */
+        max-width: 250px; /* Limit max width for readability */
+        flex: none; /* Remove flex-grow/shrink */
+    }
+
+    /* Adjust icon sizes for smallest screens */
+    .weather-info-box img { /* Base size for pressure on this breakpoint */
+        width: 45px;
+        height: 45px;
+    }
+
+    #homeHumidityIcon,
+    #searchHumidityIcon,
+    #homeWindIcon,
+    #searchWindIcon {
+        width: 100px; /* Humidity/Wind larger for this breakpoint */
+        height:100px;
+    }
+
+    .back-arrow {
+        font-size: 2rem;
+        top: 1rem;
+        left: 1rem;
+    }
+}
+
+/* Removed redundant and unused classes/IDs */
+/* .input-group, #homeIcon, #searchIcon, .temp, .icon, .place, .search-button */
